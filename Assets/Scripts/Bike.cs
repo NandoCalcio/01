@@ -6,26 +6,36 @@ using UnityEngine;
 public class Bike : Vehicle
 {
     [SerializeField] TextMeshProUGUI bikeSpeedDisplay;
-        
+    private float currentBikeSpeed;
+    private Rigidbody bikeRb;
+    
+
     // Start is called before the first frame update
     void Start()
     {
-        this.speed = 15.0f;
+        this.maxSpeed = 100f;
+        this.horsePower = 200f;
+        this.accel = 2.0f;
+
+        bikeRb = GetComponent<Rigidbody>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        transform.Translate(Vector3.right * Time.deltaTime * speed);
-        bikeSpeedDisplay.text = "Bike Speed : " + BikeSpeed + " mph";
+        if (currentBikeSpeed < maxSpeed)
+        {
+            bikeRb.AddForce(Vector3.right * this.horsePower * this.accel * Time.deltaTime);
+            bikeSpeedDisplay.text = "Bike Speed : " + BikeSpeed + " mph";
+        }
     }
 
-    private string BikeSpeed
+    private float BikeSpeed
     {
         get
         {
-            string bikeSpeed = speed.ToString();
-            return bikeSpeed;
+            currentBikeSpeed = Mathf.Round(bikeRb.velocity.magnitude * 3.6f); 
+            return currentBikeSpeed;
         }
     }
 }

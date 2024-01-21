@@ -4,7 +4,10 @@ using UnityEngine;
 
 public class Vehicle : MonoBehaviour
 {
-    protected float speed;
+    protected float maxSpeed;
+    protected float horsePower;
+    protected float accel;
+
     // Start is called before the first frame update
     
 }
