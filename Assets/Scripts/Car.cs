@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-public class Car : Vehicle
+public class Car : Vehicle // INHERITANCE
 {
     [SerializeField] TextMeshProUGUI carSpeedDisplay;
     private float currentCarSpeed;
@@ -12,7 +12,7 @@ public class Car : Vehicle
     // Start is called before the first frame update
     void Start()
     {
-        this.maxSpeed = 75f;
+        this.maxSpeed = 75f; 
         this.horsePower = 300f;
         this.accel = 1.5f;
 
@@ -27,6 +27,8 @@ public class Car : Vehicle
             carRb.AddForce(Vector3.right * this.horsePower * this.accel * Time.deltaTime);
             carSpeedDisplay.text = "Bike Speed : " + CarSpeed + " mph";
         }
+
+        
     }
 
     private float CarSpeed

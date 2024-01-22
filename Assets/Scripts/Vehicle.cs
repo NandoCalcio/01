@@ -4,10 +4,25 @@ using UnityEngine;
 
 public class Vehicle : MonoBehaviour
 {
-    protected float maxSpeed;
+    protected float maxSpeed; // ENCAPSULATION
     protected float horsePower;
     protected float accel;
 
-    // Start is called before the first frame update
     
+
+    
+
+    void Start()
+    {
+        
+    }
+
+    public virtual void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("wall"))
+        {
+            Destroy(gameObject);
+        }
+    }
 }
+

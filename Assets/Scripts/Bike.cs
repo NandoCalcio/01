@@ -3,25 +3,39 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-public class Bike : Vehicle
+public class Bike : Vehicle // INHERITANCE
 {
     [SerializeField] TextMeshProUGUI bikeSpeedDisplay;
     private float currentBikeSpeed;
     private Rigidbody bikeRb;
+
+    public AudioClip crashSound;
+
+    private AudioSource bikeAudio;
     
 
     // Start is called before the first frame update
     void Start()
     {
-        this.maxSpeed = 100f;
+        this.maxSpeed = 100f; 
         this.horsePower = 200f;
         this.accel = 2.0f;
 
         bikeRb = GetComponent<Rigidbody>();
+        bikeAudio = GetComponent<AudioSource>();
+
+        
+
     }
 
     // Update is called once per frame
     void Update()
+    {
+        Acceleration(); // ABSTRACTION
+         
+    }
+
+    void Acceleration()
     {
         if (currentBikeSpeed < maxSpeed)
         {
@@ -38,4 +52,18 @@ public class Bike : Vehicle
             return currentBikeSpeed;
         }
     }
+
+    public override void OnTriggerEnter(Collider other) // POLYMORPHiSM
+    {
+        base.OnTriggerEnter(other);
+
+        if (other.gameObject.CompareTag("Finish"))
+        {
+            bikeAudio.PlayOneShot(crashSound, 1.0f);
+        }
+    }
+    
+        
+
+    
 }
